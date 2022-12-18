@@ -1,0 +1,42 @@
+###
+### A complete description of a Prefect Deployment for flow 'My_first_pipeline'
+###
+name: ip-logging-pipeline
+description: null
+version: 27ace48d3683f112aed62e04b2c049fc
+# The work queue that will handle this deployment's runs
+work_queue_name: instance1
+tags: []
+parameters: {"name": "test user"}
+schedule: null
+infra_overrides:
+  env:
+    PREFECT_LOGGING_LEVEL: DEBUG
+infrastructure:
+  type: process
+  env: {}
+  labels: {}
+  name: null
+  command: null
+  stream_output: true
+  working_dir: null
+  block_type_slug: process
+  _block_type_slug: process
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: My_first_pipeline
+manifest_path: null
+storage: null
+path: /home/choonsik/project/tutorials/pipeline/Lab-1
+entrypoint: flow.py:flow_function
+parameter_openapi_schema:
+  title: Parameters
+  type: object
+  properties:
+    name:
+      title: name
+  required:
+  - name
+  definitions: null
