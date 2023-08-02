@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "cosmic_python_with_fastapi"
+version = "0.1.0"
+description = ""
+authors = ["hl8469"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.100.0"
+uvicorn = {extras = ["standard"], version = "^0.23.1"}
+
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
