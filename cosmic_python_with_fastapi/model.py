@@ -40,7 +40,7 @@ class Batch:
     def __repr__(self) -> str:
         return f"<Batch {self.reference}>"
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other: Batch) -> bool:
         if not isinstance(other, Batch):
             return False
         return other.reference == self.reference
@@ -48,7 +48,7 @@ class Batch:
     def __hash__(self) -> int:
         return hash(self.reference)
 
-    def __gt__(self, other) -> Any | bool:
+    def __gt__(self, other: Batch) -> Any | bool:
         if self.eta is None:
             return False
         if other.eta is None:
