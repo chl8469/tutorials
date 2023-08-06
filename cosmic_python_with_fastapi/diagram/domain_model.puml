@@ -1,0 +1,16 @@
+@startuml domain_model
+!theme sandstone
+class Batch {
+    reference
+    sku
+    eta
+    _purchased_quantity
+    _allocations
+}
+class OrderLine {
+    orderid
+    sku
+    qty
+}
+Batch o-- OrderLine
+@enduml
