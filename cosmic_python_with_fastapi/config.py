@@ -13,4 +13,4 @@ class Settings(BaseSettings):
 
 settings = Settings()
 
-create_async_engine(settings.DATABASE_URL)
+engine = create_async_engine(settings.DATABASE_URL)
