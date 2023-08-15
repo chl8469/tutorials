@@ -22,7 +22,7 @@ def allocate(line: OrderLine, batches: list[Batch]) -> str:
         return batch.reference
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class OrderLine:
     orderid: str
     sku: str
