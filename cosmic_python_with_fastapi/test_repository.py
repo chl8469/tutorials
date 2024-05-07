@@ -1,10 +1,11 @@
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.exc import NoResultFound
+import pytest
 
 import model
 import repository
 from repository import RepositoryProtocol
-import pytest
 
 pytestmark = pytest.mark.usefixtures("_orm_mapping", "initialize_database")
 
@@ -58,7 +59,7 @@ async def test_repository_can_retrieve_a_batch_with_allocations(session: AsyncSe
     await insert_allocation(session, orderline_id, batch1_id)
 
     repo: RepositoryProtocol = repository.SqlAlchemyRepository(session)
-    retrieved = await repo.get("batch1")
+    retrieved: model.Batch = await repo.get("batch1")
 
     expected = model.Batch("batch1", "GENERIC-SOFA", 100, eta=None)
     assert retrieved == expected
@@ -67,3 +68,22 @@ async def test_repository_can_retrieve_a_batch_with_allocations(session: AsyncSe
     assert retrieved._allocations == {
         model.OrderLine("order1", "GENERIC-SOFA", 12),
     }
+
+
+async def test_repository_can_retrieve_allocations(session: AsyncSession):
+    orderline_id = await insert_order_line(session)
+    batch1_id = await insert_batch(session, "batch1")
+    await insert_batch(session, "batch2")
+    await insert_allocation(session, orderline_id, batch1_id)
+
+    repo: RepositoryProtocol = repository.SqlAlchemyRepository(session)
+    retrieved: model.Batch = await repo.get("batch1")
+
+    assert retrieved._allocations == {
+        model.OrderLine("order1", "GENERIC-SOFA", 12),
+    }
+    retrieved: model.Batch = await repo.get("batch2")
+    assert retrieved._allocations == set()
+
+    with pytest.raises(NoResultFound):
+        await repo.get("batch3")
