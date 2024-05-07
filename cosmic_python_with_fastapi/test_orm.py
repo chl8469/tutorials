@@ -3,9 +3,7 @@ from sqlalchemy import select, text
 import pytest
 from sqlalchemy.ext.asyncio import AsyncSession
 
-pytestmark = pytest.mark.usefixtures(
-    "anyio_backend", "_orm_mapping", "initialize_database"
-)
+pytestmark = pytest.mark.usefixtures("_orm_mapping", "initialize_database")
 
 
 async def test_orderline_mapper_can_load_lines(session: AsyncSession):
