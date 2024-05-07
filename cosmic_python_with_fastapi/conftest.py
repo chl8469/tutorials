@@ -1,5 +1,5 @@
+import asyncio
 from collections.abc import Callable
-from typing import Literal
 
 import pytest
 from sqlalchemy.ext.asyncio import (
@@ -15,8 +15,8 @@ from orm import mapper_registry, start_mappers
 
 
 @pytest.fixture(scope="session")
-def anyio_backend() -> Literal["asyncio"]:
-    return "asyncio"
+def event_loop():
+    return asyncio.get_event_loop()
 
 
 @pytest.fixture(scope="session")
@@ -55,6 +55,5 @@ def database_session_factory(
 
 @pytest.fixture()
 async def session(database_session_factory: AsyncSessionFactory):
-    session = database_session_factory()
-    yield session
-    await session.close()
+    async with database_session_factory() as session:
+        yield session
