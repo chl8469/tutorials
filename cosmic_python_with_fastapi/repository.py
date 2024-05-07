@@ -1,13 +1,11 @@
-import abc
+from typing import Protocol
+
 
 import model
 
 
-class AbstractRepository(abc.ABC):
-    @abc.abstractmethod
-    async def add(self, batch: model.Batch):
-        pass
+class RepositoryProtocol(Protocol):
+    def add(self, batch: model.Batch) -> None: ...
 
-    @abc.abstractmethod
-    async def get(self, reference) -> model.Batch:
-        pass
+    def get(self, reference: str) -> model.Batch: ...
+
