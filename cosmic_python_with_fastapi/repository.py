@@ -23,3 +23,8 @@ class SqlAlchemyRepository:
         stmt = select(model.Batch).where(model.Batch.reference == reference)
         result = await self.session.execute(stmt)
         return result.unique().scalars().one()
+
+    async def list(self) -> list[model.Batch]:
+        stmt = select(model.Batch)
+        result = await self.session.execute(stmt)
+        return result.unique().scalars().all()
