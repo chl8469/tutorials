@@ -1,18 +1,23 @@
 [tool.poetry]
-name = "cosmic_python_with_fastapi"
+name = "cosmic-python-with-fastapi"
 version = "0.1.0"
 description = ""
 authors = ["hl8469"]
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
-python = "^3.11"
-fastapi = "^0.100.0"
-uvicorn = {extras = ["standard"], version = "^0.23.1"}
+python = "^3.12"
+fastapi = "^0.111.0"
+uvicorn = {extras = ["standard"], version = "^0.29.0"}
+sqlalchemy = "^2.0.30"
+pydantic-settings = "^2.2.1"
+asyncpg = "^0.29.0"
 
 
 [tool.poetry.group.test.dependencies]
-pytest = "^7.4.0"
+pytest = "^8.2.0"
+pytest-asyncio = "^0.23.6"
 
 [build-system]
 requires = ["poetry-core"]
