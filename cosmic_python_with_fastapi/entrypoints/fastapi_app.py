@@ -12,10 +12,10 @@ from sqlalchemy.orm import clear_mappers
 from starlette import status
 
 import config
-import model
-import repository
-import services
-from orm import start_mappers
+from adapters import repository
+from adapters.orm import start_mappers
+from domain import model
+from service_layer import services
 
 
 @asynccontextmanager

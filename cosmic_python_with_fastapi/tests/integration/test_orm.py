@@ -1,4 +1,4 @@
-import model
+from domain import model
 from sqlalchemy import select, text
 import pytest
 from sqlalchemy.ext.asyncio import AsyncSession

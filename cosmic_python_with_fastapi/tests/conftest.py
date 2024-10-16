@@ -13,8 +13,8 @@ from sqlalchemy.ext.asyncio import (
 )
 from sqlalchemy.orm import clear_mappers
 
+from adapters.orm import mapper_registry, start_mappers
 from config import settings
-from orm import mapper_registry, start_mappers
 
 
 @pytest.fixture(scope="session")
@@ -105,7 +105,7 @@ async def add_stock(session: AsyncSession):
 
 @pytest.fixture
 async def init_app():
-    from fastapi_app import app
+    from entrypoints.fastapi_app import app
 
     async with LifespanManager(app) as manager:
         yield manager.app

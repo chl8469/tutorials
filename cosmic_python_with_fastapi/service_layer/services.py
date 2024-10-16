@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
-import model
-from repository import RepositoryProtocol
+from adapters.repository import RepositoryProtocol
+from domain import model
 
 
 class InvalidSkuError(Exception):
