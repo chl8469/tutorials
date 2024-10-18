@@ -3,9 +3,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import NoResultFound
 import pytest
 
-import model
-import repository
-from repository import RepositoryProtocol
+from domain import model
+from adapters import repository
+from adapters.repository import RepositoryProtocol
 
 pytestmark = pytest.mark.usefixtures("_orm_mapping", "initialize_database")
 

@@ -3,13 +3,15 @@ from typing import Protocol
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-import model
+from domain import model
 
 
 class RepositoryProtocol(Protocol):
     def add(self, batch: model.Batch) -> None: ...
 
-    def get(self, reference: str) -> model.Batch: ...
+    async def get(self, reference: str) -> model.Batch: ...
+
+    async def list(self) -> list[model.Batch]: ...
 
 
 class SqlAlchemyRepository:
